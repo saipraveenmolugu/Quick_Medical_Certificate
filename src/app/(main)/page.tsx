@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,12 +24,32 @@ const stagger = {
   },
 };
 
+function StatCounter({ target, suffix = "", prefix = "", decimals = 0 }: { target: number; suffix?: string; prefix?: string; decimals?: number }) {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) =>
+    prefix + latest.toLocaleString(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    }) + suffix
+  );
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  useEffect(() => {
+    if (isInView) {
+      animate(count, target, { duration: 2, ease: "easeOut" });
+    }
+  }, [isInView, count, target]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+}
+
 export default function HomePage() {
   const stats = [
-    { value: "10,000+", label: "Certificates Issued" },
-    { value: "500+", label: "Verified Doctors" },
-    { value: "30 Min", label: "Average Delivery" },
-    { value: "4.9/5", label: "Customer Rating" },
+    { target: 10000, suffix: "+", label: "Certificates Issued" },
+    { target: 500, suffix: "+", label: "Verified Doctors" },
+    { target: 30, suffix: " Min", label: "Average Delivery" },
+    { target: 4.9, decimals: 1, suffix: "/5", label: "Customer Rating" },
   ];
 
   const howItWorks = [
@@ -163,7 +184,11 @@ export default function HomePage() {
                 variants={fadeInUp}
               >
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text mb-2">
-                  {stat.value}
+                  <StatCounter
+                    target={stat.target}
+                    suffix={stat.suffix}
+                    decimals={stat.decimals}
+                  />
                 </div>
                 <div className="text-gray-500 text-xs sm:text-sm">{stat.label}</div>
               </motion.div>

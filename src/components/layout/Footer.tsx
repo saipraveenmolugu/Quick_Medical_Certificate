@@ -34,19 +34,21 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                     {/* Brand */}
                     <div className="space-y-6">
-                        <Link href="/" className="inline-block group transition-transform hover:scale-105">
-                            <Image
-                                src="/footer-logo.png"
-                                alt="Quick Medical Certificate"
-                                width={220}
-                                height={160}
-                                className="h-28 w-auto object-contain filter invert-[0.9] hue-rotate-[180deg] brightness-[1.2] contrast-[1.1]"
-                                priority
-                            />
+                        <Link href="/" className="inline-block group transition-transform hover:scale-[1.02]">
+                            <div className="flex items-center gap-3">
+                                <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-900/10">
+                                    <span className="font-bold text-lg">Q</span>
+                                </div>
+                                <h2 className="text-xl font-black text-[#ffffff] !text-white tracking-tight">
+                                    Quick Medical Certificate
+                                </h2>
+                            </div>
                         </Link>
                         <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-                            India's most trusted platform for legitimate medical certificates.
-                            Secure teleconsultation with NMC-registered doctors, available 24/7 with instant delivery.
+                            The fastest and most reliable way to obtain valid medical certificates
+                            online. We connect you with verified Indian doctors for swift
+                            consultation and authentic documentation, maintaining 100%
+                            compliance with healthcare regulations.
                         </p>
 
                         {/* Social Links */}
