@@ -259,8 +259,8 @@ export default function CertificateDetailPage() {
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
                                     className={`relative bg-white rounded-2xl p-6 shadow-lg border-2 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${option.popular
-                                            ? "border-blue-500 ring-4 ring-blue-100"
-                                            : "border-gray-100 hover:border-blue-200"
+                                        ? "border-blue-500 ring-4 ring-blue-100"
+                                        : "border-gray-100 hover:border-blue-200"
                                         }`}
                                 >
                                     {option.popular && (
