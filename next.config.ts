@@ -1,17 +1,21 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  output: 'export',
+const isProd = process.env.NODE_ENV === 'production';
 
-  // GitHub Pages - IMPORTANT: Uncomment these after first successful build
-  // basePath: '/Quick_Medical_Certificate',
-  // assetPrefix: '/Quick_Medical_Certificate/',
+const nextConfig: NextConfig = {
+  // Only enable static export for production builds
+  ...(isProd && { output: 'export' }),
+
+  // GitHub Pages - Enable for production deployment
+  // Uncomment these lines if your site doesn't load properly on GitHub Pages
+  // basePath: isProd ? '/Quick_Medical_Certificate' : '',
+  // assetPrefix: isProd ? '/Quick_Medical_Certificate/' : '',
 
   images: {
     unoptimized: true,
   },
 
-  // This ensures proper routing for GitHub Pages
+  // This ensures proper routing
   trailingSlash: true,
 };
 

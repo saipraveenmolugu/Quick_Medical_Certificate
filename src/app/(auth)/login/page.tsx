@@ -214,7 +214,7 @@ export default function LoginPage() {
                                                     required
                                                 />
                                                 <p className="text-center text-sm text-gray-500">
-                                                    Didn't receive code?{" "}
+                                                    Didn&apos;t receive code?{" "}
                                                     <button
                                                         type="button"
                                                         className="text-primary font-medium hover:underline"
@@ -319,7 +319,7 @@ export default function LoginPage() {
                                             <p className="mt-6 text-center text-sm text-gray-600">
                                                 {mode === "login" ? (
                                                     <>
-                                                        Don't have an account?{" "}
+                                                        Don&apos;t have an account?{" "}
                                                         <button
                                                             type="button"
                                                             onClick={() => setMode("signup")}

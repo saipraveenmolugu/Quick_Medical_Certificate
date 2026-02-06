@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Star, CheckCircle, MessageSquare } from "lucide-react";
 
@@ -90,12 +91,12 @@ export default function ReviewPage() {
                         Your review has been submitted successfully. It will be published
                         after verification.
                     </p>
-                    <a
+                    <Link
                         href="/"
                         className="inline-block bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-semibold px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     >
                         Back to Home
-                    </a>
+                    </Link>
                 </motion.div>
             </div>
         );
@@ -226,8 +227,8 @@ export default function ReviewPage() {
                                         >
                                             <Star
                                                 className={`w-8 h-8 ${star <= (hoveredRating || formData.rating)
-                                                        ? "text-yellow-400 fill-yellow-400"
-                                                        : "text-gray-300"
+                                                    ? "text-yellow-400 fill-yellow-400"
+                                                    : "text-gray-300"
                                                     } transition-colors`}
                                             />
                                         </button>
