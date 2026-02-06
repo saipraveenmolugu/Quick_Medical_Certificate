@@ -138,8 +138,8 @@ export default function LoginPage() {
                                                     type="button"
                                                     onClick={() => setAuthMethod("phone")}
                                                     className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${authMethod === "phone"
-                                                            ? "bg-white text-primary shadow-sm"
-                                                            : "text-gray-500 hover:text-gray-700"
+                                                        ? "bg-white text-primary shadow-sm"
+                                                        : "text-gray-500 hover:text-gray-700"
                                                         }`}
                                                 >
                                                     📱 Phone
@@ -148,8 +148,8 @@ export default function LoginPage() {
                                                     type="button"
                                                     onClick={() => setAuthMethod("email")}
                                                     className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${authMethod === "email"
-                                                            ? "bg-white text-primary shadow-sm"
-                                                            : "text-gray-500 hover:text-gray-700"
+                                                        ? "bg-white text-primary shadow-sm"
+                                                        : "text-gray-500 hover:text-gray-700"
                                                         }`}
                                                 >
                                                     ✉️ Email
@@ -351,11 +351,11 @@ export default function LoginPage() {
                     {/* Security Notice */}
                     <p className="mt-6 text-center text-xs text-gray-500">
                         🔒 Your data is encrypted and secure. By continuing, you agree to our{" "}
-                        <Link href="/terms-of-service" className="underline hover:text-gray-700">
+                        <Link href="/terms" className="underline hover:text-gray-700">
                             Terms
                         </Link>{" "}
                         and{" "}
-                        <Link href="/privacy-policy" className="underline hover:text-gray-700">
+                        <Link href="/privacy" className="underline hover:text-gray-700">
                             Privacy Policy
                         </Link>
                     </p>
