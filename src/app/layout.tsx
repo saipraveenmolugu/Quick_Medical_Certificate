@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   description: "Get legitimate medical certificates from registered doctors through secure teleconsultation. Sick leave, fitness, recovery certificates available 24/7.",
   keywords: ["medical certificate", "sick leave certificate", "fitness certificate", "online doctor consultation", "telemedicine"],
   authors: [{ name: "QuickMedicalCertificate" }],
+  icons: {
+    icon: [
+      { url: "/icon.png" },
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-icon.png" },
+    ],
+  },
   openGraph: {
     title: "QuickMedicalCertificate - Medical Certificates Online",
     description: "Get legitimate medical certificates from registered doctors through secure teleconsultation.",
