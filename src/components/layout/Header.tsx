@@ -21,11 +21,14 @@ export default function Header() {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const pathname = usePathname();
 
-    const isDarkPage = pathname === "/about" || pathname === "/contact";
-    const isHeaderWhite = scrolled || mobileMenuOpen;
+    const isAboutOrContact = pathname?.startsWith("/about") || pathname?.startsWith("/contact");
+    const isHeaderWhite = scrolled || mobileMenuOpen || isAboutOrContact;
 
-    const headerTextClass = isHeaderWhite ? "text-gray-600" : (isDarkPage ? "text-white" : "text-gray-600");
-    const mobileMenuIconClass = isHeaderWhite ? "text-gray-900" : (isDarkPage ? "text-white" : "text-gray-900");
+    const navLinkClass = isAboutOrContact ? "text-gray-600" : "text-gray-600 hover:text-primary";
+    const activeBlueClass = isAboutOrContact ? "text-primary" : "text-gray-600 hover:text-primary";
+    const specialNavClass = "text-gray-600 transition-colors";
+
+    const mobileMenuIconClass = "text-gray-900";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -58,8 +61,8 @@ export default function Header() {
         <header
             className={cn(
                 "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                (scrolled || mobileMenuOpen)
-                    ? "bg-white/95 backdrop-blur-md py-3 shadow-lg shadow-gray-900/5"
+                isHeaderWhite
+                    ? "bg-white py-3 shadow-md border-b border-gray-100"
                     : "bg-transparent py-5"
             )}
         >
@@ -81,7 +84,7 @@ export default function Header() {
                     <div className="hidden lg:flex items-center gap-6">
                         <Link
                             href="/"
-                            className={cn("font-medium transition-colors", headerTextClass)}
+                            className={cn("font-medium transition-colors", navLinkClass)}
                         >
                             Home
                         </Link>
@@ -89,7 +92,7 @@ export default function Header() {
                         {/* Certificates Mega Menu */}
                         <div ref={dropdownRef} className="relative">
                             <button
-                                className={cn("flex items-center gap-1 font-medium transition-colors", headerTextClass)}
+                                className={cn("flex items-center gap-1 font-medium transition-colors", navLinkClass)}
                                 onClick={() => setCertificatesDropdownOpen(!certificatesDropdownOpen)}
                                 onMouseEnter={() => setCertificatesDropdownOpen(true)}
                             >
@@ -185,7 +188,7 @@ export default function Header() {
 
                         <Link
                             href="/#certificates"
-                            className={cn("font-medium transition-colors flex items-center gap-1", headerTextClass)}
+                            className={cn("font-medium transition-colors flex items-center gap-1", activeBlueClass)}
                         >
                             <Stethoscope className="w-4 h-4" />
                             Doctor Consultation
@@ -193,21 +196,21 @@ export default function Header() {
 
                         <Link
                             href="/about"
-                            className={cn("font-medium transition-colors", headerTextClass)}
+                            className={cn("font-medium transition-colors", specialNavClass)}
                         >
                             About Us
                         </Link>
 
                         <Link
                             href="/#faq"
-                            className={cn("font-medium transition-colors", headerTextClass)}
+                            className={cn("font-medium transition-colors", navLinkClass)}
                         >
                             FAQ
                         </Link>
 
                         <Link
                             href="/contact"
-                            className={cn("font-medium transition-colors", headerTextClass)}
+                            className={cn("font-medium transition-colors", specialNavClass)}
                         >
                             Contact Us
                         </Link>
@@ -216,12 +219,15 @@ export default function Header() {
                     {/* CTA Buttons */}
                     <div className="hidden lg:flex items-center gap-3">
                         <Link href="/login">
-                            <Button variant="ghost" size="sm" className={cn(headerTextClass, "hover:bg-white/10")}>
+                            <Button variant="ghost" size="sm" className={cn(navLinkClass, isAboutOrContact ? "hover:bg-transparent" : "hover:bg-white/10")}>
                                 Login
                             </Button>
                         </Link>
                         <Link href="/#certificates">
-                            <Button size="sm" className="shadow-lg shadow-primary/25">
+                            <Button
+                                size="sm"
+                                className={cn("shadow-lg shadow-primary/25", isAboutOrContact && "hover:translate-y-0 hover:shadow-lg")}
+                            >
                                 Get Certificate
                             </Button>
                         </Link>
