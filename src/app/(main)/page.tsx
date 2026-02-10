@@ -195,36 +195,6 @@ export default function HomePage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
             >
-              {/* Floating Card - Satisfied Patients (Top Left) */}
-              <motion.div
-                className="absolute top-8 left-0 lg:top-16 lg:left-4 z-20"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-              >
-                <div className="bg-white rounded-2xl shadow-xl p-4 border border-gray-100">
-                  {/* Avatar Stack */}
-                  <div className="flex -space-x-2 mb-2">
-                    {[
-                      "bg-gradient-to-br from-blue-400 to-blue-600",
-                      "bg-gradient-to-br from-green-400 to-green-600",
-                      "bg-gradient-to-br from-purple-400 to-purple-600",
-                      "bg-gradient-to-br from-orange-400 to-orange-600",
-                      "bg-gradient-to-br from-pink-400 to-pink-600",
-                    ].map((color, i) => (
-                      <div
-                        key={i}
-                        className={`w-8 h-8 rounded-full ${color} border-2 border-white flex items-center justify-center text-white text-xs font-bold`}
-                      >
-                        {String.fromCharCode(65 + i)}
-                      </div>
-                    ))}
-                  </div>
-                  <div className="text-2xl font-bold text-gray-900">10,000+</div>
-                  <div className="text-sm text-gray-500">Satisfied Patients</div>
-                </div>
-              </motion.div>
-
               {/* Doctor Image */}
               <div className="relative z-10 w-full max-w-[320px] sm:max-w-[450px] lg:max-w-none flex justify-center lg:justify-end">
                 <Image
