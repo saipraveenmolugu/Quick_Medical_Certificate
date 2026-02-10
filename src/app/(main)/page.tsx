@@ -299,7 +299,7 @@ export default function HomePage() {
                 variants={fadeInUp}
                 whileHover={{ y: -8, transition: { duration: 0.3 } }}
               >
-                <Link href={`/certificates/${cert.id}`}>
+                <Link href={`/certificates/${cert.id}/`}>
                   <div className="group relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 h-full flex flex-col">
                     {/* Icon */}
                     <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">

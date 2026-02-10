@@ -1,6 +1,5 @@
 import React from "react";
 import { CERTIFICATE_TYPES } from "@/lib/utils";
-import CertificateDetailClient from "./CertificateDetailClient";
 
 export function generateStaticParams() {
     return CERTIFICATE_TYPES.map((cert) => ({
@@ -10,5 +9,10 @@ export function generateStaticParams() {
 
 export default async function CertificateDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    return <CertificateDetailClient certificateId={id} />;
+    return (
+        <div className="p-20">
+            <h1 className="text-4xl font-bold">Certificate ID: {id}</h1>
+            <p>If you see this, the route is working.</p>
+        </div>
+    );
 }

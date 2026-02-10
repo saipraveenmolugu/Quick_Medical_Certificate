@@ -118,7 +118,7 @@ export default function Header() {
                                                     {leaveCertificates.map((cert) => (
                                                         <li key={cert.id}>
                                                             <Link
-                                                                href={`/certificates/${cert.id}`}
+                                                                href={`/certificates/${cert.id}/`}
                                                                 className="text-sm text-gray-600 transition-colors block py-1"
                                                                 onClick={() => setCertificatesDropdownOpen(false)}
                                                             >
@@ -139,7 +139,7 @@ export default function Header() {
                                                     {fitnessCertificates.map((cert) => (
                                                         <li key={cert.id}>
                                                             <Link
-                                                                href={`/certificates/${cert.id}`}
+                                                                href={`/certificates/${cert.id}/`}
                                                                 className="text-sm text-gray-600 transition-colors block py-1"
                                                                 onClick={() => setCertificatesDropdownOpen(false)}
                                                             >
@@ -160,7 +160,7 @@ export default function Header() {
                                                     {medicalCertificates.map((cert) => (
                                                         <li key={cert.id}>
                                                             <Link
-                                                                href={`/certificates/${cert.id}`}
+                                                                href={`/certificates/${cert.id}/`}
                                                                 className="text-sm text-gray-600 transition-colors block py-1"
                                                                 onClick={() => setCertificatesDropdownOpen(false)}
                                                             >
@@ -297,7 +297,7 @@ export default function Header() {
                                                     {CERTIFICATE_TYPES.map((cert) => (
                                                         <Link
                                                             key={cert.id}
-                                                            href={`/certificates/${cert.id}`}
+                                                            href={`/certificates/${cert.id}/`}
                                                             className="block text-sm text-gray-500 py-1.5"
                                                             onClick={() => {
                                                                 setMobileMenuOpen(false);
