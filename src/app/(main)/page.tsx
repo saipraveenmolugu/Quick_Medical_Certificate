@@ -196,13 +196,13 @@ export default function HomePage() {
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               {/* Doctor Image */}
-              <div className="relative z-10 w-full max-w-[320px] sm:max-w-[450px] lg:max-w-none flex justify-center lg:justify-end">
+              <div className="relative z-10 w-full max-w-[300px] sm:max-w-[400px] lg:max-w-none flex justify-center lg:justify-end">
                 <Image
                   src="/doctor-hero.PNG"
                   alt="Board Certified Doctor"
                   width={600}
                   height={600}
-                  className="w-full lg:w-auto h-auto lg:h-[110%] object-contain object-bottom lg:scale-110 lg:translate-y-6 lg:origin-bottom-right"
+                  className="w-full lg:w-auto h-auto lg:h-[105%] object-contain object-bottom lg:scale-105 lg:translate-y-4 lg:origin-bottom-right"
                   priority
                 />
               </div>
@@ -476,51 +476,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Certificate Descriptions */}
-      <section className="py-16 md:py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center mb-10 md:mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Types of Medical Certificates We Offer
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
-              All certificates are issued by certified doctors through a quick and convenient online consultation.
-            </p>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto space-y-6">
-            {CERTIFICATE_TYPES.map((cert, i) => (
-              <motion.div
-                key={cert.id}
-                className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="text-3xl shrink-0">{cert.icon}</div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-lg text-gray-900 mb-2">{cert.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{cert.longDescription}</p>
-                    <Link href={`/certificates/apply/${cert.id}`}>
-                      <Button size="sm" variant="outline" className="group">
-                        Get Certificate
-                        <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* FAQ Section */}
       <section id="faq" className="py-16 md:py-20 bg-white">
