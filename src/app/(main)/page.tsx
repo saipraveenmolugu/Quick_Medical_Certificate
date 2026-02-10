@@ -101,7 +101,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-[100svh] lg:min-h-screen flex items-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 pt-16 lg:pt-12 overflow-hidden">
+      <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-50 overflow-hidden">
         {/* Background Decorations - Subtle circles like reference */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Large subtle circles */}
@@ -114,11 +114,11 @@ export default function HomePage() {
           <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-blue-50/50 rounded-full blur-3xl" />
         </div>
 
-        <div className="container mx-auto px-4 lg:pr-0 relative z-10 min-h-[calc(100vh-80px)] flex flex-col justify-start pt-8 lg:pt-12">
+        <div className="container mx-auto px-4 lg:pr-0 relative z-10 flex flex-col justify-center py-20 lg:py-0">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-4 items-stretch">
             {/* Left Content */}
             <motion.div
-              className="text-center lg:text-left lg:pl-16 xl:pl-24 h-full flex flex-col justify-start lg:pt-12"
+              className="text-center lg:text-left lg:pl-16 xl:pl-24 h-full flex flex-col justify-center"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -190,7 +190,7 @@ export default function HomePage() {
 
             {/* Right Image with Floating Cards */}
             <motion.div
-              className="relative flex justify-center lg:justify-end items-end h-full min-h-[400px] lg:min-h-0"
+              className="relative flex justify-center lg:justify-end items-center h-full min-h-[400px] lg:min-h-0"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.2 }}
@@ -202,7 +202,7 @@ export default function HomePage() {
                   alt="Board Certified Doctor"
                   width={600}
                   height={600}
-                  className="w-full lg:w-auto h-auto lg:h-[105%] object-contain object-bottom lg:scale-105 lg:translate-y-4 lg:origin-bottom-right"
+                  className="w-full lg:w-auto h-auto lg:h-full object-contain object-center lg:scale-100 lg:origin-center"
                   priority
                 />
               </div>
