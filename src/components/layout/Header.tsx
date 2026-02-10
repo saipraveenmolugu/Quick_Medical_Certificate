@@ -19,24 +19,52 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [certificatesDropdownOpen, setCertificatesDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
+    const [activeHash, setActiveHash] = useState("");
     const pathname = usePathname();
-
-    const isAboutOrContact = pathname?.startsWith("/about") || pathname?.startsWith("/contact");
-    const isHeaderWhite = scrolled || mobileMenuOpen || isAboutOrContact;
-
-    const navLinkClass = isAboutOrContact ? "text-gray-600" : "text-gray-600 hover:text-primary";
-    const activeBlueClass = isAboutOrContact ? "text-primary" : "text-gray-600 hover:text-primary";
-    const specialNavClass = "text-gray-600 transition-colors";
-
-    const mobileMenuIconClass = "text-gray-900";
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
+
+            // Update active hash based on scroll position or just use window.location.hash
+            if (window.location.hash !== activeHash) {
+                setActiveHash(window.location.hash);
+            }
         };
+
+        const handleHashChange = () => {
+            setActiveHash(window.location.hash);
+        };
+
         window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+        window.addEventListener("hashchange", handleHashChange);
+
+        // Initial check
+        setActiveHash(window.location.hash);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("hashchange", handleHashChange);
+        };
+    }, [activeHash]);
+
+    // Helper to check if a link is active
+    const isActive = (href: string) => {
+        if (href === "/") {
+            return pathname === "/" && (!activeHash || activeHash === "#");
+        }
+        if (href.startsWith("/#")) {
+            const hash = href.substring(1);
+            return pathname === "/" && activeHash === hash;
+        }
+        return pathname?.startsWith(href);
+    };
+
+    const isAboutOrContact = pathname?.startsWith("/about") || pathname?.startsWith("/contact");
+    const isHeaderWhite = scrolled || mobileMenuOpen || isAboutOrContact;
+    const navLinkClass = isAboutOrContact ? "text-gray-600" : "text-gray-600 hover:text-primary";
+    const specialNavClass = "text-gray-600 transition-colors";
+    const mobileMenuIconClass = "text-gray-900";
 
     // Close dropdown when clicking outside
     useEffect(() => {
@@ -75,23 +103,43 @@ export default function Header() {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center gap-6">
+                    <div className="hidden lg:flex items-center gap-8">
                         <Link
                             href="/"
-                            className={cn("font-medium transition-colors", navLinkClass)}
+                            className={cn(
+                                "relative font-medium transition-colors py-1",
+                                isActive("/") ? "text-primary" : navLinkClass
+                            )}
                         >
                             Home
+                            {isActive("/") && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                    initial={false}
+                                />
+                            )}
                         </Link>
 
                         {/* Certificates Mega Menu */}
                         <div ref={dropdownRef} className="relative">
                             <button
-                                className={cn("flex items-center gap-1 font-medium transition-colors", navLinkClass)}
+                                className={cn(
+                                    "relative flex items-center gap-1 font-medium transition-colors py-1",
+                                    isActive("/certificates") ? "text-primary" : navLinkClass
+                                )}
                                 onClick={() => setCertificatesDropdownOpen(!certificatesDropdownOpen)}
                                 onMouseEnter={() => setCertificatesDropdownOpen(true)}
                             >
                                 Certificates
                                 <ChevronDown className={cn("w-4 h-4 transition-transform", certificatesDropdownOpen && "rotate-180")} />
+                                {isActive("/certificates") && (
+                                    <motion.div
+                                        layoutId="nav-underline"
+                                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                        initial={false}
+                                    />
+                                )}
                             </button>
 
                             <AnimatePresence>
@@ -101,22 +149,29 @@ export default function Header() {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: 10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-full left-0 mt-2 w-[600px] bg-white rounded-xl shadow-xl border border-gray-100 p-6"
+                                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[700px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-8 overflow-hidden"
                                         onMouseLeave={() => setCertificatesDropdownOpen(false)}
                                     >
-                                        <div className="grid grid-cols-3 gap-6">
+                                        <div className="grid grid-cols-3 gap-8">
                                             {/* Leave Certificates */}
-                                            <div>
-                                                <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                                                    <span className="text-lg">📋</span>
-                                                    Leave Certificates
-                                                </h4>
-                                                <ul className="space-y-2">
+                                            <div className="space-y-4">
+                                                <div className="flex items-center gap-3 pb-2 border-b border-gray-50">
+                                                    <div className="p-2 bg-blue-50 rounded-lg">
+                                                        <span className="text-xl">📋</span>
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-900 leading-tight">
+                                                        Leave<br />Certificates
+                                                    </h4>
+                                                </div>
+                                                <ul className="space-y-1">
                                                     {leaveCertificates.map((cert) => (
                                                         <li key={cert.id}>
                                                             <Link
                                                                 href={`/certificates/${cert.id}/`}
-                                                                className="text-sm text-gray-600 transition-colors block py-1"
+                                                                className={cn(
+                                                                    "text-[13px] transition-all block py-1.5 px-3 rounded-lg hover:bg-blue-50 hover:text-primary",
+                                                                    pathname?.startsWith(`/certificates/${cert.id}`) ? "text-primary font-semibold bg-blue-50" : "text-gray-600"
+                                                                )}
                                                                 onClick={() => setCertificatesDropdownOpen(false)}
                                                             >
                                                                 {cert.name}
@@ -127,17 +182,24 @@ export default function Header() {
                                             </div>
 
                                             {/* Fitness & Work Status */}
-                                            <div>
-                                                <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                                                    <span className="text-lg">💪</span>
-                                                    Fitness & Work Status
-                                                </h4>
-                                                <ul className="space-y-2">
+                                            <div className="space-y-4">
+                                                <div className="flex items-center gap-3 pb-2 border-b border-gray-50">
+                                                    <div className="p-2 bg-green-50 rounded-lg">
+                                                        <span className="text-xl">💪</span>
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-900 leading-tight">
+                                                        Fitness &<br />Work Status
+                                                    </h4>
+                                                </div>
+                                                <ul className="space-y-1">
                                                     {fitnessCertificates.map((cert) => (
                                                         <li key={cert.id}>
                                                             <Link
                                                                 href={`/certificates/${cert.id}/`}
-                                                                className="text-sm text-gray-600 transition-colors block py-1"
+                                                                className={cn(
+                                                                    "text-[13px] transition-all block py-1.5 px-3 rounded-lg hover:bg-green-50 hover:text-green-600",
+                                                                    pathname?.startsWith(`/certificates/${cert.id}`) ? "text-green-600 font-semibold bg-green-50" : "text-gray-600"
+                                                                )}
                                                                 onClick={() => setCertificatesDropdownOpen(false)}
                                                             >
                                                                 {cert.name}
@@ -148,17 +210,24 @@ export default function Header() {
                                             </div>
 
                                             {/* Medical Records */}
-                                            <div>
-                                                <h4 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                                                    <span className="text-lg">🏥</span>
-                                                    Medical Records
-                                                </h4>
-                                                <ul className="space-y-2">
+                                            <div className="space-y-4">
+                                                <div className="flex items-center gap-3 pb-2 border-b border-gray-50">
+                                                    <div className="p-2 bg-purple-50 rounded-lg">
+                                                        <span className="text-xl">🏥</span>
+                                                    </div>
+                                                    <h4 className="font-bold text-gray-900 leading-tight">
+                                                        Medical<br />Records
+                                                    </h4>
+                                                </div>
+                                                <ul className="space-y-1">
                                                     {medicalCertificates.map((cert) => (
                                                         <li key={cert.id}>
                                                             <Link
                                                                 href={`/certificates/${cert.id}/`}
-                                                                className="text-sm text-gray-600 transition-colors block py-1"
+                                                                className={cn(
+                                                                    "text-[13px] transition-all block py-1.5 px-3 rounded-lg hover:bg-purple-50 hover:text-purple-600",
+                                                                    pathname?.startsWith(`/certificates/${cert.id}`) ? "text-purple-600 font-semibold bg-purple-50" : "text-gray-600"
+                                                                )}
                                                                 onClick={() => setCertificatesDropdownOpen(false)}
                                                             >
                                                                 {cert.name}
@@ -168,10 +237,10 @@ export default function Header() {
                                                 </ul>
                                                 <Link
                                                     href="/#certificates"
-                                                    className="mt-4 inline-block text-sm font-semibold text-primary transition-colors"
+                                                    className="mt-4 flex items-center gap-2 text-sm font-bold text-primary hover:gap-3 transition-all px-3"
                                                     onClick={() => setCertificatesDropdownOpen(false)}
                                                 >
-                                                    View All Certificates →
+                                                    View All Certificates <ChevronDown className="w-4 h-4 -rotate-90" />
                                                 </Link>
                                             </div>
                                         </div>
@@ -182,31 +251,71 @@ export default function Header() {
 
                         <Link
                             href="/#certificates"
-                            className={cn("font-medium transition-colors flex items-center gap-1", activeBlueClass)}
+                            className={cn(
+                                "relative font-medium transition-colors flex items-center gap-1 py-1",
+                                isActive("/#certificates") ? "text-primary" : navLinkClass
+                            )}
                         >
                             <Stethoscope className="w-4 h-4" />
                             Doctor Consultation
+                            {isActive("/#certificates") && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                    initial={false}
+                                />
+                            )}
                         </Link>
 
                         <Link
                             href="/about"
-                            className={cn("font-medium transition-colors", specialNavClass)}
+                            className={cn(
+                                "relative font-medium transition-colors py-1",
+                                isActive("/about") ? "text-primary" : specialNavClass
+                            )}
                         >
                             About Us
+                            {isActive("/about") && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                    initial={false}
+                                />
+                            )}
                         </Link>
 
                         <Link
                             href="/#faq"
-                            className={cn("font-medium transition-colors", navLinkClass)}
+                            className={cn(
+                                "relative font-medium transition-colors py-1",
+                                isActive("/#faq") ? "text-primary" : navLinkClass
+                            )}
                         >
                             FAQ
+                            {isActive("/#faq") && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                    initial={false}
+                                />
+                            )}
                         </Link>
 
                         <Link
                             href="/contact"
-                            className={cn("font-medium transition-colors", specialNavClass)}
+                            className={cn(
+                                "relative font-medium transition-colors py-1",
+                                isActive("/contact") ? "text-primary" : specialNavClass
+                            )}
                         >
                             Contact Us
+                            {isActive("/contact") && (
+                                <motion.div
+                                    layoutId="nav-underline"
+                                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
+                                    initial={false}
+                                />
+                            )}
                         </Link>
                     </div>
 
@@ -271,16 +380,23 @@ export default function Header() {
                                 <div className="flex flex-col gap-2">
                                     <Link
                                         href="/"
-                                        className="text-gray-600 font-medium py-2"
+                                        className={cn(
+                                            "font-medium py-3 px-4 rounded-lg flex items-center justify-between transition-colors",
+                                            isActive("/") ? "bg-blue-50 text-primary border-l-4 border-primary" : "text-gray-600"
+                                        )}
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         Home
+                                        {isActive("/") && <ChevronDown className="w-4 h-4 -rotate-90 opacity-50" />}
                                     </Link>
 
                                     {/* Mobile Certificates Accordion */}
-                                    <div>
+                                    <div className={cn("rounded-lg overflow-hidden transition-colors", isActive("/certificates") && "bg-gray-50/50")}>
                                         <button
-                                            className="flex items-center justify-between w-full text-gray-600 font-medium py-2"
+                                            className={cn(
+                                                "flex items-center justify-between w-full font-medium py-3 px-4",
+                                                isActive("/certificates") ? "text-primary border-l-4 border-primary bg-blue-50" : "text-gray-600"
+                                            )}
                                             onClick={() => setCertificatesDropdownOpen(!certificatesDropdownOpen)}
                                         >
                                             Certificates
@@ -292,13 +408,16 @@ export default function Header() {
                                                     initial={{ opacity: 0, height: 0 }}
                                                     animate={{ opacity: 1, height: "auto" }}
                                                     exit={{ opacity: 0, height: 0 }}
-                                                    className="pl-4 overflow-hidden"
+                                                    className="pl-8 pr-4 pb-2 space-y-1 overflow-hidden"
                                                 >
                                                     {CERTIFICATE_TYPES.map((cert) => (
                                                         <Link
                                                             key={cert.id}
                                                             href={`/certificates/${cert.id}/`}
-                                                            className="block text-sm text-gray-500 py-1.5"
+                                                            className={cn(
+                                                                "block text-sm py-2 px-3 rounded-md transition-colors",
+                                                                pathname?.startsWith(`/certificates/${cert.id}`) ? "text-primary font-semibold bg-white shadow-sm" : "text-gray-500"
+                                                            )}
                                                             onClick={() => {
                                                                 setMobileMenuOpen(false);
                                                                 setCertificatesDropdownOpen(false);
@@ -314,7 +433,10 @@ export default function Header() {
 
                                     <Link
                                         href="/#certificates"
-                                        className="text-gray-600 font-medium py-2 flex items-center gap-2"
+                                        className={cn(
+                                            "font-medium py-3 px-4 rounded-lg flex items-center gap-2 transition-colors",
+                                            isActive("/#certificates") ? "bg-blue-50 text-primary border-l-4 border-primary" : "text-gray-600"
+                                        )}
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         <Stethoscope className="w-4 h-4" />
@@ -323,15 +445,22 @@ export default function Header() {
 
                                     <Link
                                         href="/about"
-                                        className="text-gray-600 font-medium py-2"
+                                        className={cn(
+                                            "font-medium py-3 px-4 rounded-lg flex items-center justify-between transition-colors",
+                                            isActive("/about") ? "bg-blue-50 text-primary border-l-4 border-primary" : "text-gray-600"
+                                        )}
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         About Us
+                                        {isActive("/about") && <ChevronDown className="w-4 h-4 -rotate-90 opacity-50" />}
                                     </Link>
 
                                     <Link
                                         href="/#faq"
-                                        className="text-gray-600 font-medium py-2"
+                                        className={cn(
+                                            "font-medium py-3 px-4 rounded-lg flex items-center justify-between transition-colors",
+                                            isActive("/#faq") ? "bg-blue-50 text-primary border-l-4 border-primary" : "text-gray-600"
+                                        )}
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         FAQ
@@ -339,10 +468,14 @@ export default function Header() {
 
                                     <Link
                                         href="/contact"
-                                        className="text-gray-600 font-medium py-2"
+                                        className={cn(
+                                            "font-medium py-3 px-4 rounded-lg flex items-center justify-between transition-colors",
+                                            isActive("/contact") ? "bg-blue-50 text-primary border-l-4 border-primary" : "text-gray-600"
+                                        )}
                                         onClick={() => setMobileMenuOpen(false)}
                                     >
                                         Contact Us
+                                        {isActive("/contact") && <ChevronDown className="w-4 h-4 -rotate-90 opacity-50" />}
                                     </Link>
 
                                     <div className="flex flex-col gap-2 pt-4 border-t border-gray-100 mt-2">
