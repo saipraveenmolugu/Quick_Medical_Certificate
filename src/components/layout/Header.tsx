@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Stethoscope, Phone } from "lucide-react";
+import { ChevronDown, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn, CERTIFICATE_TYPES } from "@/lib/utils";
 
@@ -49,13 +49,7 @@ export default function Header() {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const navLinks = [
-        { href: "/", label: "Home" },
-        { href: "/#certificates", label: "Doctor Consultation" },
-        { href: "/about", label: "About Us" },
-        { href: "/#faq", label: "FAQ" },
-        { href: "/contact", label: "Contact Us" },
-    ];
+
 
     return (
         <header

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { CheckCircle2, ChevronDown, ChevronRight, Shield, Clock, Award, Phone } from "lucide-react";
+import { CheckCircle2, ChevronDown, Shield, Clock, Award, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -13,7 +13,7 @@ import {
   PAYMENT_OPTIONS,
   FAQ_DATA,
   formatCurrency,
-  CERTIFICATE_CATEGORIES,
+
 } from "@/lib/utils";
 
 // Animation variants
@@ -293,7 +293,7 @@ export default function HomePage() {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {CERTIFICATE_TYPES.map((cert, index) => (
+            {CERTIFICATE_TYPES.map((cert, _index) => (
               <motion.div
                 key={cert.id}
                 variants={fadeInUp}

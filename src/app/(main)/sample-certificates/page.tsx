@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+
 import { FileText, Download, Eye, X, ArrowRight } from "lucide-react";
 import { CERTIFICATE_TYPES } from "@/lib/utils";
 

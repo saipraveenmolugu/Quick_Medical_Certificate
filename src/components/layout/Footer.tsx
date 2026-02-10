@@ -1,17 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+
 import {
     Phone,
     Mail,
-    MapPin,
     Clock,
     Shield,
     Award,
     Heart,
 } from "lucide-react";
-import { SOCIAL_LINKS, CERTIFICATE_TYPES, CERTIFICATE_CATEGORIES } from "@/lib/utils";
+import { SOCIAL_LINKS, CERTIFICATE_TYPES } from "@/lib/utils";
 
 // Social Icons Components
 function LinkedInIcon({ className }: { className?: string }) {
@@ -74,7 +73,7 @@ const socialLinks = [
 // Categorize certificates
 const leaveCertificates = CERTIFICATE_TYPES.filter(c => c.category === "leave");
 const fitnessCertificates = CERTIFICATE_TYPES.filter(c => c.category === "fitness");
-const medicalCertificates = CERTIFICATE_TYPES.filter(c => c.category === "medical");
+
 
 export default function Footer() {
     const quickLinks = [
@@ -113,9 +112,9 @@ export default function Footer() {
 
                         {/* Contact Info */}
                         <div className="space-y-3 mb-6">
-                            <a href="tel:+91XXXXXXXXXX" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                            <a href="tel:+918737854807" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                                 <Phone className="w-4 h-4" />
-                                <span className="text-sm">+91 XXX XXXXXXX</span>
+                                <span className="text-sm">+91 8737854807</span>
                             </a>
                             <a href="mailto:support@quickmedicalcertificate.com" className="flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                                 <Mail className="w-4 h-4" />
