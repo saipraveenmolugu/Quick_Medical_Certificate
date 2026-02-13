@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { UseFormRegister, FieldError } from 'react-hook-form';
+import { UseFormRegister, FieldError, FieldValues } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 
 interface TermsCheckboxProps {
-    register: UseFormRegister<any>;
+    register: UseFormRegister<FieldValues>;
     error?: FieldError;
     onChange?: (checked: boolean) => void;
     className?: string;

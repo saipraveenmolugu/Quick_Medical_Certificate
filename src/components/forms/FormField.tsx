@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { UseFormRegister, FieldError } from 'react-hook-form';
+import { UseFormRegister, FieldError, FieldValues } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
@@ -9,7 +9,7 @@ interface FormFieldProps {
     label: string;
     name: string;
     type?: 'text' | 'email' | 'tel' | 'number' | 'date';
-    register: UseFormRegister<any>;
+    register: UseFormRegister<FieldValues>;
     error?: FieldError;
     placeholder?: string;
     required?: boolean;

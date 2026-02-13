@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { UseFormRegister, FieldError } from 'react-hook-form';
+import { UseFormRegister, FieldError, FieldValues } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
@@ -14,7 +14,7 @@ interface RadioFieldProps {
     label: string;
     name: string;
     options: RadioOption[];
-    register: UseFormRegister<any>;
+    register: UseFormRegister<FieldValues>;
     error?: FieldError;
     required?: boolean;
     onChange?: (value: string) => void;

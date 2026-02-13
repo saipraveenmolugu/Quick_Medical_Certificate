@@ -1,14 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { UseFormRegister, FieldError } from 'react-hook-form';
+import { UseFormRegister, FieldError, FieldValues } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 interface OTPInputProps {
-    phoneRegister: UseFormRegister<any>;
-    otpRegister: UseFormRegister<any>;
+    phoneRegister: UseFormRegister<FieldValues>;
+    otpRegister: UseFormRegister<FieldValues>;
     phoneError?: FieldError;
     otpError?: FieldError;
     onRequestOTP?: (phone: string) => Promise<void>;

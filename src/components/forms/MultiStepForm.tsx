@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -51,10 +51,10 @@ export function MultiStepForm({
                         <React.Fragment key={index}>
                             <div
                                 className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-colors ${index === currentStep
-                                        ? 'border-blue-600 bg-blue-600 text-white'
-                                        : index < currentStep
-                                            ? 'border-green-600 bg-green-600 text-white'
-                                            : 'border-gray-300 bg-white text-gray-500'
+                                    ? 'border-blue-600 bg-blue-600 text-white'
+                                    : index < currentStep
+                                        ? 'border-green-600 bg-green-600 text-white'
+                                        : 'border-gray-300 bg-white text-gray-500'
                                     }`}
                             >
                                 {index + 1}

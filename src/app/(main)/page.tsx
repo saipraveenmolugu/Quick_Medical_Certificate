@@ -293,7 +293,7 @@ export default function HomePage() {
             whileInView="animate"
             viewport={{ once: true }}
           >
-            {CERTIFICATE_TYPES.map((cert, _index) => (
+            {CERTIFICATE_TYPES.map((cert) => (
               <motion.div
                 key={cert.id}
                 variants={fadeInUp}

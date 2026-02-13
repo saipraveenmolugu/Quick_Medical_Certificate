@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
-import { UseFormRegister, FieldError } from 'react-hook-form';
+import React from 'react';
+import { UseFormRegister, FieldError, FieldValues } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 
 interface AddressInputProps {
-    register: UseFormRegister<any>;
+    register: UseFormRegister<FieldValues>;
     errors?: {
         street?: FieldError;
         city?: FieldError;

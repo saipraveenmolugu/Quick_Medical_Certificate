@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { UseFormRegister, FieldError } from 'react-hook-form';
+import { UseFormRegister, FieldError, FieldValues } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Upload, File, X } from 'lucide-react';
@@ -10,7 +10,7 @@ interface FileUploadProps {
     label: string;
     name: string;
     accept?: string;
-    register: UseFormRegister<any>;
+    register: UseFormRegister<FieldValues>;
     error?: FieldError;
     required?: boolean;
     onChange?: (file: File | null) => void;
@@ -77,11 +77,17 @@ export function FileUpload({
 
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
                 <input
-                    ref={fileInputRef}
                     type="file"
                     accept={accept}
                     {...register(name)}
-                    onChange={handleFileChange}
+                    onChange={(e) => {
+                        handleFileChange(e);
+                        register(name).onChange(e);
+                    }}
+                    ref={(e) => {
+                        register(name).ref(e);
+                        (fileInputRef as React.MutableRefObject<HTMLInputElement | null>).current = e;
+                    }}
                     className="hidden"
                 />
 

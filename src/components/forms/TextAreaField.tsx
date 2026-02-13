@@ -1,14 +1,14 @@
 'use client';
 
 import React from 'react';
-import { UseFormRegister, FieldError } from 'react-hook-form';
+import { UseFormRegister, FieldError, FieldValues } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
 interface TextAreaFieldProps {
     label: string;
     name: string;
-    register: UseFormRegister<any>;
+    register: UseFormRegister<FieldValues>;
     error?: FieldError;
     placeholder?: string;
     required?: boolean;

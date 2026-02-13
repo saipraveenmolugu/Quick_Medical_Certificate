@@ -55,7 +55,7 @@ export const certificateDetailsSchema = z.object({
     documentFormat: z.nativeEnum(DocumentFormat),
     paymentOption: z.nativeEnum(DocumentFormat),
     termsAccepted: z.literal(true, {
-        errorMap: () => ({ message: 'You must accept the terms and conditions' }),
+        message: 'You must accept the terms and conditions',
     }),
 });
 

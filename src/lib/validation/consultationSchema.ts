@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { patientDetailsSchema, certificateDetailsSchema, fileSchema } from './sickLeaveSchema';
+import { patientDetailsSchema, fileSchema } from './sickLeaveSchema';
 import { DOCTOR_CONSULTATION_FEE } from '@/constants/pricing';
 
 // Doctor Consultation Schema (single step)
@@ -7,7 +7,7 @@ export const consultationFormSchema = z.object({
     ...patientDetailsSchema.shape,
     govtIdProof: fileSchema,
     termsAccepted: z.literal(true, {
-        errorMap: () => ({ message: 'You must accept the terms and conditions' }),
+        message: 'You must accept the terms and conditions',
     }),
 });
 

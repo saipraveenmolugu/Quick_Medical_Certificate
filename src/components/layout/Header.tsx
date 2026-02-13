@@ -19,7 +19,7 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [certificatesDropdownOpen, setCertificatesDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-    const [activeHash, setActiveHash] = useState("");
+    const [activeHash, setActiveHash] = useState(() => (typeof window !== "undefined" ? window.location.hash : ""));
     const pathname = usePathname();
 
     useEffect(() => {
@@ -38,9 +38,6 @@ export default function Header() {
 
         window.addEventListener("scroll", handleScroll);
         window.addEventListener("hashchange", handleHashChange);
-
-        // Initial check
-        setActiveHash(window.location.hash);
 
         return () => {
             window.removeEventListener("scroll", handleScroll);
