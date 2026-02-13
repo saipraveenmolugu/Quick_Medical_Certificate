@@ -90,7 +90,7 @@ export default function Header() {
                     {/* Logo */}
                     <Link href="/" className="flex items-center">
                         <Image
-                            src={getAssetPath("/footer-logo.PNG")}
+                            src={getAssetPath("/footer-logo.png")}
                             alt="Quick Medical Certificate"
                             width={240}
                             height={65}
