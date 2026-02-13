@@ -1,12 +1,14 @@
 import type { NextConfig } from "next";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const nextConfig: NextConfig = {
   // Enable static export for GitHub Pages
   output: 'export',
 
   // GitHub Pages configuration
-  basePath: '/Quick_Medical_Certificate',
-  assetPrefix: '/Quick_Medical_Certificate/',
+  basePath: basePath,
+  assetPrefix: basePath ? `${basePath}/` : undefined,
 
   images: {
     unoptimized: true,
