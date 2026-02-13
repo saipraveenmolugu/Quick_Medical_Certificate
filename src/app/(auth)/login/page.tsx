@@ -54,7 +54,7 @@ export default function LoginPage() {
                 <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
                     <Link href="/">
                         <Image
-                            src="/logo.png"
+                            src={getAssetPath("/logo.png")}
                             alt="Quick Medical Certificate"
                             width={250}
                             height={70}
