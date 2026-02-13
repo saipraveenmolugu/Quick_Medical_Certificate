@@ -5,9 +5,8 @@ const nextConfig: NextConfig = {
   output: 'export',
 
   // GitHub Pages configuration
-  // Uncomment if your site doesn't load assets properly
-  // basePath: '/Quick_Medical_Certificate',
-  // assetPrefix: '/Quick_Medical_Certificate/',
+  basePath: '/Quick_Medical_Certificate',
+  assetPrefix: '/Quick_Medical_Certificate/',
 
   images: {
     unoptimized: true,
