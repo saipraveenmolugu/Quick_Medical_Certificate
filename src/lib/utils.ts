@@ -5,6 +5,14 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
+// Helper to get correctly prefixed asset path for GitHub Pages
+export function getAssetPath(path: string): string {
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+    // Avoid double slashes and handle root paths
+    const cleanPath = path.startsWith('/') ? path : `/${path}`;
+    return `${basePath}${cleanPath}`;
+}
+
 // Format currency to INR
 export function formatCurrency(amount: number): string {
     return new Intl.NumberFormat("en-IN", {

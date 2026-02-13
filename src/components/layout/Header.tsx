@@ -7,7 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Stethoscope } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn, CERTIFICATE_TYPES } from "@/lib/utils";
+import { cn, CERTIFICATE_TYPES, getAssetPath } from "@/lib/utils";
 
 // Group certificates by category
 const leaveCertificates = CERTIFICATE_TYPES.filter(c => c.category === "leave");
@@ -90,7 +90,7 @@ export default function Header() {
                     {/* Logo */}
                     <Link href="/" className="flex items-center">
                         <Image
-                            src="/footer-logo.PNG"
+                            src={getAssetPath("/footer-logo.PNG")}
                             alt="Quick Medical Certificate"
                             width={240}
                             height={65}

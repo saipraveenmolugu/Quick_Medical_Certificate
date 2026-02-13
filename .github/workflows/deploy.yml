@@ -28,19 +28,22 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Debug Dependencies
-        run: |
-          npm list @radix-ui/react-select || true
-          ls -R node_modules/@radix-ui || true
+      - name: Cache Next.js build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Build with Next.js
         run: npm run build
         env:
-          # Add your environment variables here if needed
-          # NEXT_PUBLIC_FIREBASE_API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}
           NODE_ENV: production
+          NEXT_PUBLIC_BASE_PATH: /Quick_Medical_Certificate
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

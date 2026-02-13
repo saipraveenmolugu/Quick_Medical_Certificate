@@ -13,6 +13,7 @@ import {
   PAYMENT_OPTIONS,
   FAQ_DATA,
   formatCurrency,
+  getAssetPath,
 
 } from "@/lib/utils";
 
@@ -198,7 +199,7 @@ export default function HomePage() {
               {/* Doctor Image */}
               <div className="relative z-10 w-full max-w-[300px] sm:max-w-[400px] lg:max-w-none flex justify-center lg:justify-end">
                 <Image
-                  src="/doctor-hero.PNG"
+                  src={getAssetPath("/doctor-hero.PNG")}
                   alt="Board Certified Doctor"
                   width={600}
                   height={600}

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { getAssetPath } from "@/lib/utils";
 
 type AuthMode = "login" | "signup" | "otp";
 
@@ -98,7 +99,7 @@ export default function LoginPage() {
                     <div className="lg:hidden mb-8 text-center">
                         <Link href="/">
                             <Image
-                                src="/logo.png"
+                                src={getAssetPath("/logo.png")}
                                 alt="Quick Medical Certificate"
                                 width={200}
                                 height={56}

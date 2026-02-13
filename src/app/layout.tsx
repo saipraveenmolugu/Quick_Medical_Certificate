@@ -8,6 +8,8 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
   title: "QuickMedicalCertificate - Get Your Medical Certificate in 30 Minutes",
   description: "Get legitimate medical certificates from registered doctors through secure teleconsultation. Sick leave, fitness, recovery certificates available 24/7.",
@@ -15,11 +17,11 @@ export const metadata: Metadata = {
   authors: [{ name: "QuickMedicalCertificate" }],
   icons: {
     icon: [
-      { url: "/icon.png" },
-      { url: "/icon.png", sizes: "32x32", type: "image/png" },
+      { url: `${basePath}/icon.png` },
+      { url: `${basePath}/icon.png`, sizes: "32x32", type: "image/png" },
     ],
     apple: [
-      { url: "/apple-icon.png" },
+      { url: `${basePath}/apple-icon.png` },
     ],
   },
   openGraph: {
